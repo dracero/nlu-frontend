@@ -1,0 +1,19 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  color: DodgerBlue;
+}
+
+.center {
+  text-align: center;
+}
+
+.logo-img{
+  width: 150px;
+  height: 150px;
+  padding: 50px;
+}
