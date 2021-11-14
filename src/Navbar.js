@@ -16,7 +16,7 @@ const NavbarList = () => {
   const list = () => {
     return(
       <div>
-        <img src={logo} alt="Logo FIUBA" class="logo-img" />
+        <img src={logo} alt="Logo FIUBA" className="logo-img" />
         <Box m={0} pt={0}>
           <Button component={Link} to="/ver-nlus" variant="contained">Ver NLUs</Button>
         </Box>
@@ -51,7 +51,7 @@ const NavbarButton = () => {
 export default function Navbar() {
   return (
     <Router>
-      <div class="center">
+      <div className="center">
         <NavbarList />
         
         <Switch>

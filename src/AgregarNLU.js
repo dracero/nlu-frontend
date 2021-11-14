@@ -1,22 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FormNameText from "./FormNameText";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import axios from "axios";
 
 import './styles.css'
 
 const AgregarNLU = () => {
+  const [newNlu, setNewNlu] = useState({});
+
+  const addNLU = (event) => {
+    event.preventDefault()
+  
+    axios.post("http://localhost:3000/nlu_structure", null, { params: newNlu})
+        .then(returnedNLU => {
+          console.log("Se agregó con exito el nlu: " + returnedNLU.data.name);
+          setNewNlu({})
+        })
+        .catch(error => {
+          console.log(error);
+        })
+  }
+
+  const handleNluChangeName = (event) => {
+    let newNluObject = {
+      ...newNlu,
+      name: event.target.value
+    }
+    setNewNlu(newNluObject)
+    console.log(newNluObject)
+  }
+  
+  const handleNluChangeText = (event) => {
+    let newNluObject = {
+      ...newNlu,
+      text: event.target.value
+    }
+    setNewNlu(newNluObject)
+    console.log(newNluObject)
+  }
 
   return (
     <div>
         <h1>Agregar NLU</h1>
-        <FormNameText />
 
-        <Box m={1} pt={2}>
-            <Button variant="contained">
-            Agregar
-            </Button>
-        </Box>
+        <div>
+          <FormNameText onSubmit={addNLU} handleNluChangeName={handleNluChangeName} handleNluChangeText={handleNluChangeText} buttonName="Agregar" />
+        </div>
     </div>
   );
 };
