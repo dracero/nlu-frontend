@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import FormNameText from "./FormNameText";
 import axios from "axios";
 
@@ -26,7 +26,6 @@ const AgregarNLU = () => {
       name: event.target.value
     }
     setNewNlu(newNluObject)
-    console.log(newNluObject)
   }
   
   const handleNluChangeText = (event) => {
@@ -35,7 +34,6 @@ const AgregarNLU = () => {
       text: event.target.value
     }
     setNewNlu(newNluObject)
-    console.log(newNluObject)
   }
 
   return (
@@ -43,7 +41,10 @@ const AgregarNLU = () => {
         <h1>Agregar NLU</h1>
 
         <div>
-          <FormNameText onSubmit={addNLU} handleNluChangeName={handleNluChangeName} handleNluChangeText={handleNluChangeText} buttonName="Agregar" />
+          <FormNameText onSubmit={addNLU} 
+                        handleNluChangeName={handleNluChangeName} 
+                        handleNluChangeText={handleNluChangeText} 
+                        buttonName="Agregar" />
         </div>
     </div>
   );

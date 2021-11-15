@@ -1,26 +1,34 @@
-import React from "react";
-import FormName from "./FormName";
-import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Box from "@mui/material/Box";
+import React, { useState } from "react";
+import FormID from "./FormID";
+import axios from "axios";
 
 import './styles.css'
 
 
 const EliminarNLU = () => {
+  const [deleteNluId, setDeleteNluId] = useState("");
+
+  const deleteNLU = (event) => {
+    event.preventDefault()
+  
+    axios.delete("http://localhost:3000/nlu_structure/" + deleteNluId)
+        .then(returnedNLU => {
+          console.log("Se eliminó con exito el nlu: " + returnedNLU.data.name);
+          setDeleteNluId("")
+        })
+        .catch(error => {
+          console.log(error);
+        })
+  }
+
+  const handleNluChangeID = (event) => {
+    setDeleteNluId(event.target.value)
+  }
 
   return (
     <div>
       <h1>Eliminar NLU</h1>
-      <FormName />
-
-      <Box m={1} pt={2}>
-        <Button variant="outlined" startIcon={<DeleteIcon />}>
-          Eliminar NLU
-        </Button>
-      </Box>
-
-
+      <FormID onSubmit={deleteNLU} handleNluChangeID={handleNluChangeID} />
     </div>
   );
 };

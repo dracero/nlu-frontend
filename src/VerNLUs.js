@@ -16,19 +16,21 @@ const render = (nlus) => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell><strong>Nombre</strong></TableCell>
+              <TableCell><strong>ID</strong></TableCell>
+              <TableCell align="left"><strong>Nombre</strong></TableCell>
               <TableCell align="left"><strong>Texto</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {nlus.map((nlu) => (
               <TableRow
-                key={nlu.name}
+                key={nlu._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {nlu.name}
+                <TableCell component="th" scope="row" style={{ width: 220 }}>
+                  {nlu._id}
                 </TableCell>
+                <TableCell align="left" style={{ width: 150 }}>{nlu.name}</TableCell>
                 <TableCell align="left">{nlu.text}</TableCell>
               </TableRow>
             ))}
