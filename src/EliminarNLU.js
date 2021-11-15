@@ -28,7 +28,8 @@ const EliminarNLU = () => {
   return (
     <div>
       <h1>Eliminar NLU</h1>
-      <FormID onSubmit={deleteNLU} handleNluChangeID={handleNluChangeID} />
+      <FormID onSubmit={deleteNLU} 
+              handleNluChangeID={handleNluChangeID} />
     </div>
   );
 };

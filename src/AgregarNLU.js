@@ -40,12 +40,10 @@ const AgregarNLU = () => {
     <div>
         <h1>Agregar NLU</h1>
 
-        <div>
-          <FormNameText onSubmit={addNLU} 
-                        handleNluChangeName={handleNluChangeName} 
-                        handleNluChangeText={handleNluChangeText} 
-                        buttonName="Agregar" />
-        </div>
+        <FormNameText onSubmit={addNLU} 
+                      handleNluChangeName={handleNluChangeName} 
+                      handleNluChangeText={handleNluChangeText} 
+                      buttonName="Agregar" />
     </div>
   );
 };
