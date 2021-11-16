@@ -1,23 +1,34 @@
 import React, { useState } from "react";
 import FormNameText from "./FormNameText";
+import Alert from "@mui/material/Alert";
 import axios from "axios";
+import url from "./index.js";
+import "./styles.css";
 
-import './styles.css'
+let errorMessage = '';
 
 const AgregarNLU = () => {
+  
   const [newNlu, setNewNlu] = useState({});
+  const [state, setState] = useState('');
 
   const addNLU = (event) => {
-    event.preventDefault()
-  
-    axios.post("http://localhost:3000/nlu_structure", null, { params: newNlu})
-        .then(returnedNLU => {
-          console.log("Se agregó con exito el nlu: " + returnedNLU.data.name);
-          setNewNlu({})
-        })
-        .catch(error => {
-          console.log(error);
-        })
+    
+    event.preventDefault();
+
+    axios
+      .post(url + "nlu_structure", null, { params: newNlu})
+      .then(returnedNLU => {
+        setNewNlu({});
+        setState('Success');
+        event.target.reset();
+      })
+      .catch(error => {
+        errorMessage = error.response.data.name;
+        setState('Error');
+        event.target.reset();
+        console.log(errorMessage);
+      })
   }
 
   const handleNluChangeName = (event) => {
@@ -25,7 +36,7 @@ const AgregarNLU = () => {
       ...newNlu,
       name: event.target.value
     }
-    setNewNlu(newNluObject)
+    setNewNlu(newNluObject);
   }
   
   const handleNluChangeText = (event) => {
@@ -33,17 +44,36 @@ const AgregarNLU = () => {
       ...newNlu,
       text: event.target.value
     }
-    setNewNlu(newNluObject)
+    setNewNlu(newNluObject);
   }
 
   return (
-    <div>
-        <h1>Agregar NLU</h1>
 
-        <FormNameText onSubmit={addNLU} 
-                      handleNluChangeName={handleNluChangeName} 
-                      handleNluChangeText={handleNluChangeText} 
-                      buttonName="Agregar" />
+    <div>
+
+      <h1>Agregar NLU</h1>
+
+      <FormNameText onSubmit={addNLU} 
+          handleNluChangeName={handleNluChangeName}
+          handleNluChangeText={handleNluChangeText}
+          buttonName="Agregar" />
+
+      {(state === 'Success') &&
+        <div>
+          <Alert variant="outlined" severity="success">
+            NLU agregado exitosamente.
+          </Alert>
+        </div>
+      }
+
+      {(state === 'Error') &&
+        <div>
+          <Alert variant="outlined" severity="error">
+            {errorMessage}
+          </Alert>
+        </div>
+      }
+
     </div>
   );
 };
