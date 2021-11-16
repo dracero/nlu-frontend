@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import FormNameTextID from "./FormNameTextID";
+import Alert from "@mui/material/Alert";
 import axios from "axios";
-
-import './styles.css'
+import url from "./index.js";
+import "./styles.css";
 
 const EditarNLU = () => {
   const [updateNlu, setUpdateNlu] = useState({id:''});
+  const [state, setState] = useState('');
 
   const updateNLU = (event) => {
+    
     event.preventDefault()
   
-    axios.put("http://localhost:3000/nlu_structure", null, { params: updateNlu})
-        .then(returnedNLU => {
-          console.log("Se actualizó con exito el nlu: " + updateNlu.id);
-          setUpdateNlu({id:''})
-        })
-        .catch(error => {
-          console.log(error);
-        })
+    axios
+      .put(url + "nlu_structure", null, { params: updateNlu})
+      .then(returnedNLU => {
+        setUpdateNlu({id:''});
+        setState('Success');
+      })
+      .catch(error => {
+        console.log(error);
+        setState('Error');
+      })
   }
 
   const handleNluChangeName = (event) => {
@@ -53,6 +58,23 @@ const EditarNLU = () => {
                         handleNluChangeName={handleNluChangeName} 
                         handleNluChangeText={handleNluChangeText} 
                         buttonName="Editar" />
+      
+      {(state === 'Success') && 
+        <div>
+          <Alert variant="outlined" severity="success">
+            NLU modificado exitosamente.
+          </Alert>
+        </div>
+      }
+
+      {(state === 'Error') &&
+        <div>
+          <Alert variant="outlined" severity="error">
+            Error: Nlu inexistente.
+          </Alert>
+        </div>
+      }
+
     </div>
   );
 };
