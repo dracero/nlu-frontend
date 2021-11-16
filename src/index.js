@@ -6,3 +6,7 @@ ReactDOM.render(
   <Navbar />,
   document.getElementById("root")
 );
+
+const url = "http://localhost:3000/";
+
+export default url;
