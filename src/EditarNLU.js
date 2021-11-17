@@ -18,10 +18,12 @@ const EditarNLU = () => {
       .then(returnedNLU => {
         setUpdateNlu({id:''});
         setState('Success');
+        event.target.reset();
       })
       .catch(error => {
         console.log(error);
         setState('Error');
+        event.target.reset();
       })
   }
 
