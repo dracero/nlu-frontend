@@ -22,11 +22,13 @@ const EliminarNLU = () => {
         //console.log("Se eliminó con éxito el nlu: " + returnedNLU.data.name);
         setState('Success');
         setDeleteNluId("");
+        event.target.reset();
       })
       .catch(error => {
-        errorMessage = error.response.data.name;
+        errorMessage = error;
         setState('Error');
         console.log(error);
+        event.target.reset();
       })
   }
 
