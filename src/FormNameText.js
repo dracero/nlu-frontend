@@ -10,9 +10,9 @@ const FormNameText = ({onSubmit, handleNluChangeName, handleNluChangeText, butto
       <form onSubmit={onSubmit}>
         <div className="formcontainer">
           <div className="container">
-            <TextField margin="normal" id="outlined-basic" label="Nombre" variant="outlined" onChange={handleNluChangeName}/>
+            <TextField margin="normal" id="outlined-basic" label="Nombre" variant="outlined" onChange={handleNluChangeName} onPaste={handleNluChangeName}/>
             <br/>
-            <TextField margin="normal" id="outlined-basic" label="Texto" variant="outlined" onChange={handleNluChangeText}/>
+            <TextField margin="normal" id="outlined-basic" label="Texto" variant="outlined" onChange={handleNluChangeText} onPaste={handleNluChangeText}/>
           </div>
         </div>
   

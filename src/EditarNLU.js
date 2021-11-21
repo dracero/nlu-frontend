@@ -5,23 +5,30 @@ import axios from "axios";
 import url from "./index.js";
 import "./styles.css";
 
+let errorMessage = '';
+
 const EditarNLU = () => {
-  const [updateNlu, setUpdateNlu] = useState({id:''});
+  
+  const [updateNlu, setUpdateNlu] = useState({});
   const [state, setState] = useState('');
 
   const updateNLU = (event) => {
     
-    event.preventDefault()
-  
+    event.preventDefault();
+
     axios
       .put(url + "nlu_structure", null, { params: updateNlu})
       .then(returnedNLU => {
-        setUpdateNlu({id:''});
+        console.log(updateNlu);
+        setUpdateNlu({});
         setState('Success');
         event.target.reset();
       })
       .catch(error => {
-        console.log(error);
+        console.log(updateNlu);
+        setUpdateNlu({});
+        errorMessage = error.response.data.name;
+        console.log(errorMessage);
         setState('Error');
         event.target.reset();
       })
@@ -32,7 +39,7 @@ const EditarNLU = () => {
       ...updateNlu,
       name: event.target.value
     }
-    setUpdateNlu(updateNluObject)
+    setUpdateNlu(updateNluObject);
   }
   
   const handleNluChangeText = (event) => {
@@ -40,7 +47,7 @@ const EditarNLU = () => {
       ...updateNlu,
       text: event.target.value
     }
-    setUpdateNlu(updateNluObject)
+    setUpdateNlu(updateNluObject);
   }
 
   const handleNluChangeID = (event) => {
@@ -48,7 +55,7 @@ const EditarNLU = () => {
       ...updateNlu,
       id: event.target.value
     }
-    setUpdateNlu(updateNluObject)
+    setUpdateNlu(updateNluObject);
   }
 
   return (
@@ -72,7 +79,7 @@ const EditarNLU = () => {
       {(state === 'Error') &&
         <div>
           <Alert variant="outlined" severity="error">
-            Error: Nlu inexistente.
+            {errorMessage}
           </Alert>
         </div>
       }
