@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
-const FormNameText = ({onSubmit, handleNluChangeName, handleNluChangeText, buttonName}) => {
+const FormNameTextID = ({onSubmit, handleNluChangeName, buttonName}) => {
 
   return (
     <div>
@@ -12,7 +12,7 @@ const FormNameText = ({onSubmit, handleNluChangeName, handleNluChangeText, butto
           <div className="container">
             <TextField margin="normal" id="outlined-basic" label="Nombre" variant="outlined" onChange={handleNluChangeName}/>
             <br/>
-            <TextField margin="normal" id="outlined-basic" label="Texto" variant="outlined" onChange={handleNluChangeText}/>
+            <TextField margin="normal" id="outlined-basic" label="Texto" variant="outlined" disabled={true} />
           </div>
         </div>
   
@@ -26,4 +26,4 @@ const FormNameText = ({onSubmit, handleNluChangeName, handleNluChangeText, butto
   );
 };
 
-export default FormNameText;
+export default FormNameTextID;

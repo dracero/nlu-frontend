@@ -25,10 +25,9 @@ const EliminarNLU = () => {
         event.target.reset();
       })
       .catch(error => {
-        setDeleteNluId("");
-        errorMessage = error.response.data.name;
+        errorMessage = error;
         setState('Error');
-        console.log(errorMessage);
+        console.log(error);
         event.target.reset();
       })
   }
@@ -55,7 +54,7 @@ const EliminarNLU = () => {
       {(state === 'Error') &&
         <div>
           <Alert variant="outlined" severity="error">
-            {errorMessage}
+            Error: ID no encontrado.
           </Alert>
         </div>
       }

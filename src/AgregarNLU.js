@@ -19,14 +19,11 @@ const AgregarNLU = () => {
     axios
       .post(url + "nlu_structure", null, { params: newNlu})
       .then(returnedNLU => {
-        console.log(newNlu);
         setNewNlu({});
         setState('Success');
         event.target.reset();
       })
       .catch(error => {
-        console.log(newNlu);
-        setNewNlu({});
         errorMessage = error.response.data.name;
         setState('Error');
         event.target.reset();
